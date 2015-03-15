@@ -27,7 +27,6 @@ header('Location: home.php');
 		var password = document.getElementById('pass').value;
 		var vars = 'username='+username+'&password='+password;
 		var url = "creation.php";
-		console.log(vars);
 	    var req = new XMLHttpRequest();
 	    if (!req) {
 	    throw 'Unable to create HttpRequest.';
@@ -42,6 +41,7 @@ header('Location: home.php');
 	        	{
 	        		location.href=return_data.redirect;
 	        	} else {
+	        	console.log(return_data.message);
 	        	document.getElementById("status").innerHTML = return_data.message;
 	        	}
 	        }
