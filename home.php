@@ -48,8 +48,6 @@ $stmt->close();
     <!-- Custom styles for this template -->
     <link href="css/navbar.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="searches.js"></script> 
 
 
@@ -72,9 +70,6 @@ $stmt->close();
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">My Collection</a></li>
-              <li><a href="#">Browse Games</a></li>
-              <li><a href="#">Add Games</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="logout.php">Log out</a></li>
@@ -94,22 +89,26 @@ $stmt->close();
       <div class="row">
         <div class="col-md-4">
           <h2>Search</h2>
-          <p>Search for games here. If you can't find what you're looking for you can manually enter game data.</p>
+          <p>Search for games here. You don't have to know the exact title to search. **Summary page feature under construction</p>
           <form>
-          <input type="text" class="form-control" placeholder="Game Title" id="searchTitle">
+          <input type="text" class="form-control" placeholder="Mario" id="searchTitle">
           <br/>
           <input type="button" class="btn btn-default btn-primary" value="Run Search" onclick="createList()">
           </form>
         </div>
         <div class="col-md-4">
-          <h2>Review</h2>
-          <p>Pick a game from your library to review</p>
-          <p><a class="btn btn-default btn-primary" value="See Collection" onclick="myList()">View details</a></p>
+          <h2>Review Collection</h2>
+          <p>Pick a game from your collection to review. All games will be listed below. **List will generate with your collection, but review and summary pages are not yet complete.</p>
+          <input type="button" class="btn btn-default btn-primary" value="Show my Games" onclick="myList()">
        </div>
         <div class="col-md-4">
-          <h2>Browse</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <h2>Add Game to Database</h2>
+          <p>If you can't find the game you are looking for add it to the database with this form.</p>
+          <input type="text" class="form-control" placeholder="Game Title" id="title">
+          <br/>
+          <input type="text" class="form-control" placeholder="Release Year" id="year">
+          <br/>
+          <input type="button" class="btn btn-default btn-primary" value="Add to database" onclick="addGame()">
         </div>
       </div>
       <hr>
