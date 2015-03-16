@@ -21,7 +21,11 @@ if(!($stmt->bind_param("s", $query))){
 	echo "Bind failed: "  . $stmt->errno . " " . $stmt->error;
 }
 if(!$stmt->execute()){
-	echo "Execute failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
+	if($mysqli->connect_errno == 1062) {
+		echo "Game is already in your library!";
+	} else {
+		echo "Execute failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
+	}
 }
 if(!$stmt->bind_result($id, $name, $date)){
 	echo "Bind failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;

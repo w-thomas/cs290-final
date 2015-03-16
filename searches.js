@@ -23,7 +23,7 @@ function createList() {
 
  function addLibrary(id) {
  	var query = id;
-    var vars = 'search='+id;
+    var vars = 'gameid='+id;
     var url = "library.php";
       var req = new XMLHttpRequest();
       if (!req) {
@@ -32,9 +32,8 @@ function createList() {
 
       req.onreadystatechange = function() {
           if (this.readyState === 4 && req.status === 200) {
-            var return_data = req.responseText
-            console.log(return_data);
-            document.getElementById("results").innerHTML = return_data;
+            var return_data = req.responseText;
+      		document.getElementById("results").innerHTML = return_data;
           }                  
        };
     req.open('POST', url, true);

@@ -5,6 +5,30 @@ if(empty($_SESSION['username']))
 {
 header('Location: index.php');
 }
+
+$mysqli = new mysqli("oniddb.cws.oregonstate.edu", "thomasw-db", "s824hShW4EKidis5", "thomasw-db");
+if($mysqli->connect_errno){
+  echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
+  }
+
+if (!($stmt = $mysqli->prepare("SELECT id FROM userData WHERE username = ?"))) {
+   echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+}
+if(!($stmt->bind_param("s", $_SESSION['username']))){
+  echo "Bind failed: "  . $stmt->errno . " " . $stmt->error;
+}
+if(!$stmt->execute()){
+  echo "Execute failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
+}
+if(!$stmt->bind_result($user_id)){
+  echo "Bind failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
+}
+
+while($stmt->fetch()){
+  $uid = $user_id;
+}
+$_SESSION['id'] = $uid;
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -80,23 +104,7 @@ header('Location: index.php');
         <div class="col-md-4">
           <h2>Review</h2>
           <p>Pick a game from your library to review</p>
-          <?php
-          if(!($stmt = $mysqli->prepare("SELECT title.g FROM game g ORDER BY name"))){
-            echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
-          }
-
-          if(!$stmt->execute()){
-            echo "Execute failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
-          }
-          if(!$stmt->bind_result($id, $name)){
-            echo "Bind failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
-          }
-          while($stmt->fetch()){
-           echo '<option value=" '. $id . ' "> ' . $name . '</option>\n';
-          }
-          $stmt->close();
-          ?>
-          <p><a class="btn btn-default" href="#" role="button">View details</a></p>
+          <p><a class="btn btn-default btn-primary" value="See Collection" onclick="myList()">View details</a></p>
        </div>
         <div class="col-md-4">
           <h2>Browse</h2>
