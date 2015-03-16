@@ -26,17 +26,12 @@ header('Location: index.php');
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+    <script src="searches.js"></script> 
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
   </head>
 
   <body>
-
     <div class="container">
       <!-- Static navbar -->
       <nav class="navbar navbar-default">
@@ -67,10 +62,52 @@ header('Location: index.php');
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Game Tracker</h1>
-        <p>Hello <?php echo $_SESSION['username'] ?>! Browse your collection or all games, or search for games to add below!</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
+        <p>Hello <?php echo $_SESSION['username'] ?>! Browse your collection, all games, or search for games to add below!</p>
       </div>
+    </div> <!-- /container -->
+      <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Search</h2>
+          <p>Search for games here. If you can't find what you're looking for you can manually enter game data.</p>
+          <form>
+          <input type="text" class="form-control" placeholder="Game Title" id="searchTitle">
+          <br/>
+          <input type="button" class="btn btn-default btn-primary" value="Run Search" onclick="createList()">
+          </form>
+        </div>
+        <div class="col-md-4">
+          <h2>Review</h2>
+          <p>Pick a game from your library to review</p>
+          <?php
+          if(!($stmt = $mysqli->prepare("SELECT title.g FROM game g ORDER BY name"))){
+            echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
+          }
 
+          if(!$stmt->execute()){
+            echo "Execute failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
+          }
+          if(!$stmt->bind_result($id, $name)){
+            echo "Bind failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
+          }
+          while($stmt->fetch()){
+           echo '<option value=" '. $id . ' "> ' . $name . '</option>\n';
+          }
+          $stmt->close();
+          ?>
+          <p><a class="btn btn-default" href="#" role="button">View details</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Browse</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+      </div>
+      <hr>
+      <div id="results"></div>
+      <hr>
+      <footer>
+        <p>&copy; Psyphon zlc, 2015</p>
+      </footer>
     </div> <!-- /container -->
