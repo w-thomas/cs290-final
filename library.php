@@ -36,13 +36,16 @@ if(!($stmt->bind_param("ii",$uid, $_POST['gameid']))){
 	echo "Bind failed: "  . $stmt->errno . " " . $stmt->error;
 }
 if(!$stmt->execute()){
-	if($stmt->errno == 1062) {
-		echo "Game is already in your library!";
+	if(!$stmt->errno == 1062) {
+		echo "Success!";
 	} else {
-		echo "Game added to library!";
+		echo "Game is already in your library!";
 	}
 }
-
+	if(!$stmt->errno == 1062) {
+		echo "Success!";
+	}
+$stmt->close();
 ?>
 
 

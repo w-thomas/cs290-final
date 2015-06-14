@@ -81,7 +81,7 @@ $stmt->close();
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Game Tracker</h1>
-        <p>Hello <?php echo $_SESSION['username'] ?>! Browse your collection, all games, or search for games to add below!</p>
+        <p>Hello <?php echo $_SESSION['username'] ?>! Browse your collection, or search for games to add below!</p>
       </div>
     </div> <!-- /container -->
       <div class="container">

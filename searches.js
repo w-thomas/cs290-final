@@ -10,8 +10,6 @@ function createList() {
       req.onreadystatechange = function() {
           if (this.readyState === 4 && req.status === 200) {
             var return_data = req.responseText
-            console.log(return_data);
-            console.log(return_data.username);
             document.getElementById("results").innerHTML = return_data;
           }                  
        };
@@ -33,6 +31,7 @@ function createList() {
       req.onreadystatechange = function() {
           if (this.readyState === 4 && req.status === 200) {
             var return_data = req.responseText;
+            console.log(return_data);
       		document.getElementById("results").innerHTML = return_data;
           }                  
        };
@@ -55,7 +54,6 @@ function createList() {
           if (this.readyState === 4 && req.status === 200) {
             var return_data = req.responseText
             console.log(return_data);
-            console.log(return_data.username);
             document.getElementById("results").innerHTML = return_data;
           }                  
        };
